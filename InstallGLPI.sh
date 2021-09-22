@@ -23,4 +23,34 @@ sudo systemctl restart apache2
 # modification du fichier apache2.conf 
 sudo cp /etc/apache2/apache2.conf /etc/apache2/apache2.conf.default
 sudo cp /home/didier/Documents/InstallGLPI/apache2.conf /etc/apache2/apache2.conf
-
+# DEBUT conf PHP
+# D ici à l etiquette  FIN CONF PHP, à trouver
+# Recherchez l’emplacement du fichier de configuration PHP (installez au préalable mlocate et locate) :
+# sudo updatedb
+# locate php.ini
+# Editez le fichier de configuration php.ini :
+# sudo nano /etc/php/7.4/apache2/php.ini
+# Quelques recommandations :
+# file_uploads = On
+# max_execution_time = 300
+# memory_limit = 256M
+# post_max_size = 32M
+# max_input_time = 60
+# max_input_vars = 4440
+# FIN conf PHP
+sudo service apache2 restart
+# téléchargement de la dernière version de GLPI dans /tmp 
+cd /tmp
+wget https://github.com/glpi-project/glpi/releases/download/9.5.6/glpi-9.5.6.tgz
+# extraction dans /tmp
+tar -zxvf glpi-9.5.6.tgz 
+# Déplacement de GLPI dans vers dossier racine de Apache 
+sudo mv glpi /var/www/html/
+# Atribuer à www-data le contrôle total sur le répertoire GLPI 
+sudo chown -R www-data /var/www/html/glpi
+sudo cp /home/didier/Documents/InstallGLPI/glpi.conf /etc/apache2/conf-available/
+# activation de la conf
+sudo a2enconf glpi
+sudo systemctl reload apache2
+# redémarrage du serveur apache
+sudo service apache2 restart 
