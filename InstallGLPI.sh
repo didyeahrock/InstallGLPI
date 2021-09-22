@@ -16,6 +16,8 @@ SQL
 sudo apt install apache2 php php-mysql libapache2-mod-php
 # intallation de modules PHP
 sudo apt install php-json php-gd php-curl php-mbstring php-cas php-xml php-cli php-imap php-ldap php-xmlrpc php-apcu
+sudo apt-get install php7.4-intl
+
 # activation du module a2enmod
 sudo a2enmod rewrite
 # redémarage d'Apache
