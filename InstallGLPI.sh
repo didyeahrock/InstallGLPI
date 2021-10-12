@@ -62,3 +62,8 @@ sudo a2enconf glpi
 sudo service apache2 restart 
 # populer la base GLPI/mySQL
 mysql -uglpi -pglpi glpi < /var/www/html/glpi/install/mysql/glpi-empty.sql
+sudo chown -R www-data:www-data /var/www/html/glpi/
+sudo php /var/www/html/glpi/bin/console db:install --db-host=127.0.0.1 --db-name=glpi --db-user=glpi --db-password=glpi --force --no-interaction
+sudo chown -R www-data:www-data /var/www/html/glpi/
+
+
