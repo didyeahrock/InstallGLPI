@@ -1,10 +1,11 @@
 #!/bin/bash
 clear
+# date 12-10-2021
 echo "L'installation de GLPI va commencer"
 # Mise à jour des sources
-sudo apt update && sudo apt upgrade
+# sudo apt update && sudo apt upgrade
 # Installation de mysql server et client
-sudo apt install mysql-server mysql-client
+sudo apt install -y mysql-server mysql-client
 # mysql-creation table, user et droits
 mysql -u root -p <<SQL
 CREATE DATABASE glpi CHARACTER SET UTF8 COLLATE UTF8_BIN;
@@ -13,18 +14,19 @@ GRANT ALL PRIVILEGES ON glpi.* TO 'glpi'@'localhost';
 FLUSH PRIVILEGES;
 SQL
 # installer Apache
-sudo apt install apache2 php php-mysql libapache2-mod-php
+sudo apt install -y apache2 php php-mysql libapache2-mod-php
 # intallation de modules PHP
-sudo apt install php-json php-gd php-curl php-mbstring php-cas php-xml php-cli php-imap php-ldap php-xmlrpc php-apcu
-sudo apt-get install php7.4-intl
+sudo apt install -y php-json php-gd php-curl php-mbstring php-cas php-xml php-cli php-imap php-ldap php-xmlrpc php-apcu
+sudo apt-get install -y php7.4-intl
 
 # activation du module a2enmod
 sudo a2enmod rewrite
 # redémarage d'Apache
-sudo systemctl restart apache2
+sudo systemctl reload apache2
 # modification du fichier apache2.conf 
-sudo cp /etc/apache2/apache2.conf /etc/apache2/apache2.conf.default
-sudo cp /home/didier/Documents/InstallGLPI/apache2.conf /etc/apache2/apache2.conf
+sudo cp -v /etc/apache2/apache2.conf /etc/apache2/apache2.conf.default
+sudo cp -v apache2.conf /etc/apache2/apache2.conf
+sudo cp -v glpi.conf /etc/apache2/conf-available/
 # DEBUT conf PHP
 # D ici à l etiquette  FIN CONF PHP, à trouver
 # Recherchez l’emplacement du fichier de configuration PHP (installez au préalable mlocate et locate) :
@@ -50,9 +52,8 @@ tar -zxvf glpi-9.5.6.tgz
 sudo mv glpi /var/www/html/
 # Atribuer à www-data le contrôle total sur le répertoire GLPI 
 sudo chown -R www-data /var/www/html/glpi
-sudo cp /home/didier/Documents/InstallGLPI/glpi.conf /etc/apache2/conf-available/
 # activation de la conf
 sudo a2enconf glpi
-sudo systemctl reload apache2
+# sudo systemctl reload apache2
 # redémarrage du serveur apache
 sudo service apache2 restart 
