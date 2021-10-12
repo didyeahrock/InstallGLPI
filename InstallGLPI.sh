@@ -61,4 +61,4 @@ sudo a2enconf glpi
 # redémarrage du serveur apache
 sudo service apache2 restart 
 # populer la base GLPI/mySQL
-mysql -uglpi -pglpi glpi < var/www/html/glpi/install/mysql/glpi-empty.sql
+mysql -uglpi -pglpi glpi < /var/www/html/glpi/install/mysql/glpi-empty.sql
