@@ -18,6 +18,9 @@ sudo apt install -y apache2 php php-mysql libapache2-mod-php
 # intallation de modules PHP
 sudo apt install -y php-json php-gd php-curl php-mbstring php-cas php-xml php-cli php-imap php-ldap php-xmlrpc php-apcu
 sudo apt-get install -y php7.4-intl
+sudo apt-get install -y php7.4-bz2
+sudo apt-get install -y php7.4-zip
+
 
 # activation du module a2enmod
 sudo a2enmod rewrite
