@@ -4,7 +4,7 @@ clear
 # this script will make an unattended install of GLPI, MySql and PHP 
 echo "L'installation de GLPI va commencer"
 # update and upgrade the packets
-sudo apt update && sudo apt upgrade
+sudo apt update -y && sudo apt upgrade -y
 # Install of  mysql server and client
 echo "mysql-server mysql-server/root_password password P@ssw0rd" | debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password P@ssw0rd" | debconf-set-selections
