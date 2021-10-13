@@ -2,7 +2,15 @@
 clear
 # date 13-10-2021
 # this script will make an unattended install of GLPI, MySql and PHP 
-echo "L'installation de GLPI va commencer"
+while true; do
+    read -p "Do you want to install GLPI ? Enter y (yes) or n (no) and press Enter  => " yn
+    case $yn in
+        [Yy]* ) make install; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+# echo "L'installation de GLPI va commencer"
 # update and upgrade the packets
 sudo apt update -y && sudo apt upgrade -y
 # Install of  mysql server and client
@@ -23,8 +31,6 @@ sudo apt install -y php-json php-gd php-curl php-mbstring php-cas php-xml php-cl
 sudo apt-get install -y php7.4-intl
 sudo apt-get install -y php7.4-bz2
 sudo apt-get install -y php7.4-zip
-
-
 # activation of the  a2enmod module
 sudo a2enmod rewrite
 # modification of the default apache2.conf file
@@ -51,6 +57,6 @@ sudo chown -R www-data:www-data /var/www/html/glpi/
 sudo php /var/www/html/glpi/bin/console db:install --db-host=127.0.0.1 --db-name=glpi --db-user=glpi --db-password=glpi --force --no-interaction
 sudo chown -R www-data:www-data /var/www/html/glpi/
 # launch Firefox with GLPI home page
-firefox "http://localhost/glpi"
+sudo firefox "http://localhost/glpi"
 
 
