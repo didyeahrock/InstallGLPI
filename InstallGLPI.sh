@@ -14,11 +14,11 @@ done
 # update and upgrade the packets
 sudo apt update -y && sudo apt upgrade -y
 # Install of  mysql server and client
-echo "mysql-server mysql-server/root_password password P@ssw0rd" | debconf-set-selections
-echo "mysql-server mysql-server/root_password_again password P@ssw0rd" | debconf-set-selections
-sudo apt install -y mysql-server mysql-client
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password P@ssw0rd'
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password P@ssw0rd'
+sudo apt install -y mysql-server 
 # mysql-creation table, user et droits
-mysql -u root -p <<SQL
+mysql -uroot -pP@ssw0rd <<SQL
 CREATE DATABASE glpi CHARACTER SET UTF8 COLLATE UTF8_BIN;
 CREATE USER 'glpi'@'localhost' IDENTIFIED BY 'glpi';
 GRANT ALL PRIVILEGES ON glpi.* TO 'glpi'@'localhost';
