@@ -19,9 +19,14 @@ sudo apt remove -y php-json php-gd php-curl php-mbstring php-cas php-xml php-cli
 sudo apt-get remove -y php7.4-intl
 sudo apt-get remove -y php7.4-bz2
 sudo apt-get remove -y php7.4-zip
-
+#
 sudo rm -R /etc/apache2
 sudo rm -R /tmp/*
 sudo rm -R /var/www/html/glpi
+#
+sudo apt autoclean 
+sudo apt clean 
+sudo apt autoremove
+#
 sudo reboot
 
