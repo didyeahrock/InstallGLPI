@@ -23,5 +23,5 @@ sudo apt-get remove -y php7.4-zip
 sudo rm -R /etc/apache2
 sudo rm -R /tmp/*
 sudo rm -R /var/www/html/glpi
-
+sudo reboot
 
