@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
     Script pour Installer GLPI
+    22/10/2021
 """
 # importations libraries
 import os
